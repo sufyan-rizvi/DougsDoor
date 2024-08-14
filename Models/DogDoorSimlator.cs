@@ -14,32 +14,33 @@ namespace DougsDoor.Models
         {
             DogDoor door = new DogDoor();
             Remote remote = new Remote(door);
-            
-            
+
+
 
 
 
             Console.WriteLine("Fido barks to go outside");
             remote.PressButton();
             Console.WriteLine("Fido has gone outside");
+            Console.WriteLine("Fido's all done");                   
+            
 
-            //remote.PressButton();
-            Console.WriteLine("Fido's all done");
             try
             {
                 Thread.Sleep(10000);
             }
-            catch (ThreadInterruptedException)
-            {
-                Console.WriteLine("Fido's stuck outside");
-                Console.WriteLine("Fido starts barking");
-                Console.WriteLine("Gina grabs remote");
-                remote.PressButton();
-                Console.WriteLine("Fido's back inside");
-            }
 
-            //remote.PressButton();
+            catch (Exception ex) { }
+            Console.WriteLine("\nBut he's stuck outside !");
+            Console.WriteLine("\nFido barks to go inside");
+            Console.WriteLine("\nGina grabs the remote control.");
+            remote.PressButton();
+            Console.WriteLine("\nFido's back inside !");
+            remote.PressButton();
             
+
+
+
 
 
         }

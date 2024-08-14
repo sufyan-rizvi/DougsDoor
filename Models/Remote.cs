@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,8 +28,17 @@ namespace DougsDoor.Models
             else
             {
                 _door.OpenDoor();
-                Thread.Sleep(5000);
-                _door.CloseDoor();
+                var timer = new System.Timers.Timer(5000);
+
+                // Event handler for the timer's elapsed event
+                timer.Elapsed += (sender, e) =>
+                {
+                    _door.CloseDoor(); // Assuming a 'Close' method exists
+                    timer.Stop(); // Stop the timer after closing the door
+                };
+
+                // Start the timer
+                timer.Start();
 
             }
         }
